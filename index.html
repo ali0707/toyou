@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 Will you be my Valentine? 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Floating rose petals background */
+    .heart-bg {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background: rgba(255, 107, 157, 0.4);
+        animation: float 15s infinite;
+        border-radius: 50% 0 50% 0;
+    }
+
+    .heart-bg:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .heart-bg:nth-child(2) { left: 20%; animation-delay: 2s; }
+    .heart-bg:nth-child(3) { left: 30%; animation-delay: 4s; }
+    .heart-bg:nth-child(4) { left: 40%; animation-delay: 1s; }
+    .heart-bg:nth-child(5) { left: 50%; animation-delay: 3s; }
+    .heart-bg:nth-child(6) { left: 60%; animation-delay: 5s; }
+    .heart-bg:nth-child(7) { left: 70%; animation-delay: 2.5s; }
+    .heart-bg:nth-child(8) { left: 80%; animation-delay: 4.5s; }
+    .heart-bg:nth-child(9) { left: 90%; animation-delay: 1.5s; }
+
+    @keyframes float {
+        0% {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    .container {
+        background: white;
+        padding: 60px 40px;
+        border-radius: 30px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        max-width: 500px;
+        position: relative;
+        z-index: 10;
+        animation: slideIn 0.8s ease-out;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+        20%, 40%, 60%, 80% { transform: translateX(10px); }
+    }
+
+    h1 {
+        color: #e63946;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    .heart-icon {
+        font-size: 80px;
+        margin: 20px 0;
+        animation: heartbeat 1.5s infinite;
+    }
+
+    @keyframes heartbeat {
+        0%, 100% { transform: scale(1); }
+        10%, 30% { transform: scale(0.9); }
+        20%, 40% { transform: scale(1.1); }
+    }
+
+    .question {
+        font-size: 1.8em;
+        color: #333;
+        margin: 30px 0;
+        font-weight: bold;
+        line-height: 1.4;
+    }
+
+    .name {
+        color: #e63946;
+        font-style: italic;
+        font-size: 1.1em;
+    }
+    
+    .subtitle {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 10px;
+        font-style: italic;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    button {
+        font-size: 1.3em;
+        padding: 18px 50px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    #yesBtn {
+        background: linear-gradient(135deg, #ff6b9d 0%, #ff1744 100%);
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+
+    #yesBtn::before {
+        content: '💕';
+        position: absolute;
+        left: 15px;
+        font-size: 1.2em;
+    }
+
+    #yesBtn:hover {
+        transform: scale(1.15);
+        box-shadow: 0 8px 25px rgba(255, 23, 68, 0.5);
+    }
+
+    #noBtn {
+        background: linear-gradient(135deg, #78909c 0%, #546e7a 100%);
+        color: white;
+        transition: all 0.2s ease;
+        position: relative;
+    }
+
+    #noBtn::before {
+        content: '😢';
+        position: absolute;
+        left: 15px;
+        font-size: 1.2em;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    #noBtn:hover::before {
+        opacity: 1;
+    }
+
+    #noBtn:hover {
+        background: linear-gradient(135deg, #546e7a 0%, #37474f 100%);
+    }
+
+    /* Celebration overlay - New romantic scene */
+    .celebration {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        z-index: 100;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .celebration.active {
+        display: flex;
+        animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .celebration-content {
+        text-align: center;
+        color: #333;
+        position: relative;
+        z-index: 10;
+    }
+
+    /* Envelope animation */
+    .envelope-wrapper {
+        width: 400px;
+        height: 300px;
+        margin: 0 auto 40px;
+        position: relative;
+        animation: envelopeFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes envelopeFloat {
+        0%, 100% { transform: translateY(0px) rotate(-2deg); }
+        50% { transform: translateY(-15px) rotate(2deg); }
+    }
+
+    .envelope {
+        position: relative;
+        width: 400px;
+        height: 250px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .envelope-top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-left: 200px solid transparent;
+        border-right: 200px solid transparent;
+        border-top: 125px solid #ff6b9d;
+        transform-origin: top;
+        animation: openEnvelope 2s ease-out 1s forwards;
+    }
+
+    @keyframes openEnvelope {
+        0% { transform: rotateX(0deg); }
+        100% { transform: rotateX(180deg); }
+    }
+
+    .love-letter {
+        position: absolute;
+        width: 90%;
+        height: 200px;
+        background: linear-gradient(to bottom, #fff9f9 0%, #ffe8e8 100%);
+        top: 25px;
+        left: 5%;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        animation: letterSlideUp 1.5s ease-out 2.5s forwards;
+        transform: translateY(0);
+    }
+
+    @keyframes letterSlideUp {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-150px); }
+    }
+
+    .letter-content {
+        font-family: 'Brush Script MT', cursive, 'Arial';
+        color: #ff1744;
+        font-size: 1.3em;
+        line-height: 1.8;
+        opacity: 0;
+        animation: fadeInText 1s ease-in 3.5s forwards;
+    }
+
+    @keyframes fadeInText {
+        to { opacity: 1; }
+    }
+
+    /* Floating hearts for celebration */
+    .celebration-heart {
+        position: absolute;
+        font-size: 30px;
+        animation: floatHeart 4s ease-in-out infinite;
+        opacity: 0;
+    }
+
+    @keyframes floatHeart {
+        0% {
+            opacity: 0;
+            transform: translateY(0) scale(0);
+        }
+        10% {
+            opacity: 1;
+            transform: translateY(-20px) scale(1);
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(-500px) scale(1.5);
+        }
+    }
+
+    /* Text animations */
+    .celebration h2 {
+        font-size: 3.5em;
+        margin-bottom: 20px;
+        color: #ff1744;
+        text-shadow: 0 0 20px rgba(255, 23, 68, 0.3);
+        animation: bounceIn 1s ease-out;
+    }
+
+    @keyframes bounceIn {
+        0% {
+            transform: scale(0);
+            opacity: 0;
+        }
+        50% {
+            transform: scale(1.2);
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    .celebration p {
+        font-size: 1.8em;
+        color: #333;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 1s ease-out 0.5s both;
+    }
+
+    /* Sparkle effect */
+    .sparkle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: gold;
+        border-radius: 50%;
+        animation: sparkleAnimation 1.5s ease-in-out infinite;
+        box-shadow: 0 0 10px gold;
+    }
+
+    @keyframes sparkleAnimation {
+        0%, 100% {
+            opacity: 0;
+            transform: scale(0);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* Confetti rain */
+    .confetti-piece {
+        position: absolute;
+        width: 10px;
+        height: 15px;
+        animation: confettiRain 5s linear infinite;
+    }
+
+    @keyframes confettiRain {
+        0% {
+            transform: translateY(-100px) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(100vh) rotate(720deg);
+            opacity: 0;
+        }
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+```
+
+</head>
+<body>
+    <!-- Floating rose petals background -->
+    <div class="heart-bg">🌹</div>
+    <div class="heart-bg">🌹</div>
+    <div class="heart-bg">🌹</div>
+    <div class="heart-bg">🌹</div>
+    <div class="heart-bg">🌹</div>
+    <div class="heart-bg">🌹</div>
+    <div class="heart-bg">🌹</div>
+    <div class="heart-bg">🌹</div>
+    <div class="heart-bg">🌹</div>
+
+```
+<!-- Main container -->
+<div class="container" id="mainContainer">
+    <h1>💝 Saint-Valentin 💝</h1>
+    <div class="heart-icon">❤️</div>
+    <p class="question">
+        Veux-tu être ma Valentine, <span class="name">Anissa</span>?
+    </p>
+    <p class="subtitle">Tu illumines ma vie chaque jour ✨</p>
+    <div class="buttons">
+        <button id="yesBtn">Oui! 💕</button>
+        <button id="noBtn">Non</button>
+    </div>
+</div>
+
+<!-- Celebration overlay -->
+<div class="celebration" id="celebration">
+    <div class="celebration-content">
+        <h2>💝 Elle a dit OUI! 💝</h2>
+        
+        <!-- Envelope with love letter -->
+        <div class="envelope-wrapper">
+            <div class="envelope">
+                <div class="envelope-top"></div>
+                <div class="love-letter">
+                    <div class="letter-content">
+                        <p style="margin: 0; font-size: 1.1em;">Ma chère Anissa,</p>
+                        <p style="margin: 10px 0;">Tu es la lumière de ma vie 🥹</p>
+                        <p style="margin: 10px 0;">Chaque moment avec toi est magique...</p>
+                        <p style="margin: 10px 0; font-size: 1.3em;">Je t'aime infiniment! 💕</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <p style="font-size: 2.2em; margin-top: 20px; color: #ff1744;">Tu me rends l'homme le plus heureux du monde! 😊</p>
+        <p style="font-size: 1.6em; margin-top: 15px; font-style: italic; color: #666;">Notre histoire ne fait que commencer... 💑</p>
+    </div>
+</div>
+
+<script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const celebration = document.getElementById('celebration');
+    const questionText = document.querySelector('.question');
+    const subtitleText = document.querySelector('.subtitle');
+    
+    let noBtnSize = 1;
+    let clickCount = 0;
+
+    // Messages romantiques qui changent à chaque clic sur "Non"
+    const romanticMessages = [
+        {
+            question: "Veux-tu être ma Valentine, <span class='name'>Anissa</span>?",
+            subtitle: "Tu illumines ma vie chaque jour ✨"
+        },
+        {
+            question: "Allez, dis oui <span class='name'>Anissa</span>? 🥹",
+            subtitle: "Tu es la plus belle chose qui me soit arrivée 💕"
+        },
+        {
+            question: "Mon cœur t'appartient <span class='name'>Anissa</span>! 😢",
+            subtitle: "Chaque battement de mon cœur est pour toi..."
+        },
+        {
+            question: "Tu es certaine, <span class='name'>Anissa</span>? 💔",
+            subtitle: "Avec moi, chaque jour sera une aventure! 😊"
+        },
+        {
+            question: "Ne me fais pas ça <span class='name'>Anissa</span>... 😭",
+            subtitle: "Laisse-moi te prouver mon amour! 🙏"
+        },
+        {
+            question: "Une dernière fois <span class='name'>Anissa</span>... 🥺",
+            subtitle: "Je ferais tout pour te voir sourire chaque jour! 💖"
+        },
+        {
+            question: "D'accord <span class='name'>Anissa</span>... 😔",
+            subtitle: "Tu resteras pour toujours gravée dans mon cœur 💔"
+        }
+    ];
+
+    // Yes button click
+    yesBtn.addEventListener('click', () => {
+        celebration.classList.add('active');
+        
+        // Create floating hearts
+        setInterval(() => {
+            createCelebrationHeart();
+        }, 400);
+        
+        // Create sparkles
+        setInterval(() => {
+            createSparkle();
+        }, 200);
+        
+        // Create confetti rain
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => {
+                createConfettiPiece();
+            }, i * 100);
+        }
+        
+        setInterval(() => {
+            createConfettiPiece();
+        }, 500);
+    });
+
+    // Create celebration heart
+    function createCelebrationHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('celebration-heart');
+        heart.textContent = ['❤️', '💕', '💖', '💗', '💝'][Math.floor(Math.random() * 5)];
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.bottom = '0';
+        heart.style.animationDelay = Math.random() * 2 + 's';
+        heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        
+        celebration.appendChild(heart);
+        
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }
+
+    // Create sparkle
+    function createSparkle() {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        sparkle.style.left = Math.random() * 100 + '%';
+        sparkle.style.top = Math.random() * 100 + '%';
+        sparkle.style.animationDelay = Math.random() + 's';
+        
+        celebration.appendChild(sparkle);
+        
+        setTimeout(() => {
+            sparkle.remove();
+        }, 1500);
+    }
+
+    // Create confetti piece
+    function createConfettiPiece() {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti-piece');
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.top = '-20px';
+        confetti.style.backgroundColor = getRandomColor();
+        confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        confetti.style.animationDelay = Math.random() * 2 + 's';
+        
+        celebration.appendChild(confetti);
+        
+        setTimeout(() => {
+            confetti.remove();
+        }, 8000);
+    }
+
+    // No button click - it shrinks and moves, and changes the message
+    noBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        clickCount++;
+        
+        // Change the message
+        if (clickCount < romanticMessages.length) {
+            questionText.innerHTML = romanticMessages[clickCount].question;
+            subtitleText.textContent = romanticMessages[clickCount].subtitle;
+        }
+        
+        // Shrink the button
+        noBtnSize *= 0.75;
+        noBtn.style.transform = `scale(${noBtnSize})`;
+        
+        // Move to random position
+        const container = document.getElementById('mainContainer');
+        const containerRect = container.getBoundingClientRect();
+        const btnRect = noBtn.getBoundingClientRect();
+        
+        const maxX = containerRect.width - btnRect.width - 40;
+        const maxY = containerRect.height - btnRect.height - 40;
+        
+        const randomX = Math.random() * maxX - maxX / 2;
+        const randomY = Math.random() * maxY - maxY / 2;
+        
+        noBtn.style.position = 'relative';
+        noBtn.style.left = randomX + 'px';
+        noBtn.style.top = randomY + 'px';
+        
+        // Make yes button bigger and more attractive
+        yesBtn.style.transform = `scale(${1 + clickCount * 0.25})`;
+        
+        // Add shake animation to the container
+        const mainContainer = document.getElementById('mainContainer');
+        mainContainer.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+            mainContainer.style.animation = '';
+        }, 500);
+        
+        // Hide no button after 6 clicks
+        if (clickCount >= 6) {
+            noBtn.style.display = 'none';
+        }
+    });
+
+    // Create confetti function (keeping for compatibility)
+    function createConfetti() {
+        createConfettiPiece();
+    }
+
+    function getRandomColor() {
+        const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#00d2d3', '#ff6b9d', '#ffd93d'];
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+</script>
+```
+
+</body>
+</html>
